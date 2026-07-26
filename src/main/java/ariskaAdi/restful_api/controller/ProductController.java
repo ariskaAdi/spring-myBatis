@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ariskaAdi.restful_api.mapper.ProductMapper;
-import ariskaAdi.restful_api.model.Product;
+import ariskaAdi.restful_api.dto.ProductResponse;
+import ariskaAdi.restful_api.service.ProductService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -15,11 +15,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductMapper productMapper;
+    private final ProductService productService;
 
     @GetMapping
-    public List<Product> getAll() {
-        return productMapper.findAll();
+    public List<ProductResponse> getAll() {
+        return productService.findAll();
     }
 
 }

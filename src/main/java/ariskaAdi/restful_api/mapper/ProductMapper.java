@@ -10,6 +10,6 @@ import ariskaAdi.restful_api.model.Product;
 @Mapper
 public interface ProductMapper {
 
-    @Select("SELECT * FROM products")
-    List<Product> findAll();
+    @Select("SELECT * FROM products ORDER BY id LIMIT #{size} OFFSET #{offset}")
+    List<Product> findPage(int size, int offset);
 }
