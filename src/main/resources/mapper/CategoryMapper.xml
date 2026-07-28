@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ariskaAdi.restful_api.mapper.CategoryMapper">
+
+    <resultMap id="CategoryWithProducts" type="ariskaAdi.restful_api.model.Category">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <collection property="products" ofType="ariskaAdi.restful_api.model.Product">
+            <id property="id" column="p_id"/>
+            <result property="name" column="p_name"/>
+            <result property="price" column="p_price"/>
+            <result property="stock" column="p_stock"/>
+        </collection>
+    </resultMap>
+
+    <select id="findWithProducts" resultMap="CategoryWithProducts">
+        SELECT c.id, c.name,
+               p.id AS p_id, p.name AS p_name, p.price AS p_price, p.stock AS p_stock
+        FROM categories c
+        LEFT JOIN products p ON p.category_id = c.id
+        WHERE c.id = #{id}
+    </select>
+</mapper>

@@ -26,7 +26,7 @@ public class ProductService {
 
     public List<ProductResponse> findPage(int page, int size) {
         int offset = page * size;
-        return productMapper.findPage(size, offset).stream()
+        return productMapper.search(null, null, null, size, offset).stream()
             .map(this::toResponse)
             .toList();
     }
