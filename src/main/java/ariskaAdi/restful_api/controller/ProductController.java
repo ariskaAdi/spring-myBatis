@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ariskaAdi.restful_api.dto.ProductRequest;
 import ariskaAdi.restful_api.dto.ProductResponse;
 import ariskaAdi.restful_api.service.ProductService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -39,13 +40,13 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<ProductResponse> create(@RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> create(@Valid @RequestBody ProductRequest request) {
         ProductResponse created = productService.create(request);
         return ResponseEntity.created(URI.create("/api/v1/products" + created.getId())).body(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProductResponse> update(@PathVariable Long id, @RequestBody ProductRequest request) {
+    public ResponseEntity<ProductResponse> update(@PathVariable Long id, @Valid @RequestBody ProductRequest request) {
         return ResponseEntity.ok(productService.update(id, request));
     }
 
